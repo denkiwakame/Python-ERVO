@@ -34,7 +34,15 @@ setup(
     name="pyrvo2",
     ext_modules=cythonize(extensions),
     cmdclass={'build_ext': build_ext},
-    install_requires=[
-        'Cython>=0.22.1',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Education',
+        'Intended Audience :: Information Technology',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Topic :: Games/Entertainment :: Simulation',
+        'Topic :: Software Development :: Libraries :: Python Modules',
     ],
 )
