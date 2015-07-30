@@ -8,6 +8,8 @@ Building & installing
 ----------------------
 
 Run `python setup.py build` to build, and `python setup.py install` to install.
+Building requires Cython to be installed; just run `pip install -r requirements.txt` to
+do so.
 
 Only tested with Python 3.4 on Ubuntu Linux. If you have success (or failure)
 stories, please share them!
