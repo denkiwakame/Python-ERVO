@@ -15,7 +15,7 @@ stories, please share them!
 Differences with the C++ version
 --------------------------------
 
-The `Vector2` and `Line` classes from the RVO2 library are //not// wrapped. Instead,
+The `Vector2` and `Line` classes from the RVO2 library are _not_ wrapped. Instead,
 vectors are passed as tuples `(x, y)` from/to Python. Lines are passed as tuples
 `(point x, point y, direction x, direction y)`.
 
