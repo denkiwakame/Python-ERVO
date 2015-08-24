@@ -23,7 +23,7 @@ class build_ext(_build_ext):
 
 
 extensions = [
-    Extension('rvo2', ['src/*.pyx', 'src/*.pxd'],
+    Extension('rvo2', ['src/*.pyx'],
               include_dirs=['src'],
               libraries=['RVO'],
               library_dirs=['build/RVO2/src'],
