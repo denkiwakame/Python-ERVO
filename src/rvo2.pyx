@@ -33,7 +33,7 @@ cdef extern from "RVOSimulator.h" namespace "RVO":
                         float timeHorizonObst, float radius, float maxSpeed,
                         const Vector2 & velocity)
         size_t addObstacle(const vector[Vector2] & vertices)
-        void doStep()
+        void doStep() nogil
         size_t getAgentAgentNeighbor(size_t agentNo, size_t neighborNo) const
         size_t getAgentMaxNeighbors(size_t agentNo) const
         float getAgentMaxSpeed(size_t agentNo) const
@@ -56,9 +56,9 @@ cdef extern from "RVOSimulator.h" namespace "RVO":
         size_t getNextObstacleVertexNo(size_t vertexNo) const
         size_t getPrevObstacleVertexNo(size_t vertexNo) const
         float getTimeStep() const
-        void processObstacles()
+        void processObstacles() nogil
         bool queryVisibility(const Vector2 & point1, const Vector2 & point2,
-                             float radius) const
+                             float radius) nogil const
         void setAgentDefaults(float neighborDist, size_t maxNeighbors,
                               float timeHorizon, float timeHorizonObst,
                               float radius, float maxSpeed,
@@ -123,7 +123,9 @@ cdef class PyRVOSimulator:
         return obstacle_nr
 
     def doStep(self):
-        self.thisptr.doStep()
+        with nogil:
+            self.thisptr.doStep()
+
     def getAgentAgentNeighbor(self, size_t agent_no, size_t neighbor_no):
         return self.thisptr.getAgentAgentNeighbor(agent_no, neighbor_no)
     def getAgentMaxNeighbors(self, size_t agent_no):
@@ -173,12 +175,21 @@ cdef class PyRVOSimulator:
         return self.thisptr.getPrevObstacleVertexNo(vertex_no)
     def getTimeStep(self):
         return self.thisptr.getTimeStep()
+
     def processObstacles(self):
-        self.thisptr.processObstacles()
+        with nogil:
+            self.thisptr.processObstacles()
+
     def queryVisibility(self, tuple point1, tuple point2, float radius=0.0):
-        return self.thisptr.queryVisibility(Vector2(point1[0], point1[1]),
-                                            Vector2(point2[0], point2[1]),
-                                            radius)
+        cdef Vector2 c_point1 = Vector2(point1[0], point1[1])
+        cdef Vector2 c_point2 = Vector2(point2[0], point2[1])
+        cdef bool visible
+
+        with nogil:
+            visible = self.thisptr.queryVisibility(c_point1, c_point2, radius)
+
+        return visible
+
     def setAgentDefaults(self, float neighbor_dist, size_t max_neighbors, float time_horizon,
                          float time_horizon_obst, float radius, float max_speed,
                          tuple velocity=(0, 0)):
