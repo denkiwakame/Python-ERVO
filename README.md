@@ -11,8 +11,11 @@ branch are supposed to be stable.
 Building & installing
 ----------------------
 
-Building requires Cython to be installed; just run `pip install -r requirements.txt` to
-do so. Run `python setup.py build` to build, and `python setup.py install` to install.
+Building requires [CMake](http://cmake.org/) and [Cython](http://cython.org/) to be installed.
+Run `pip install -r requirements.txt` to install the tested version of Cython, or run
+`pip install Cython` to install the latest version.
+
+Run `python setup.py build` to build, and `python setup.py install` to install.
 Alternatively, if you want an in-place build that puts the compiled library right in
 the current directory, run `python setup.py build_ext --inplace'
 
