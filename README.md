@@ -11,9 +11,10 @@ branch are supposed to be stable.
 Building & installing
 ----------------------
 
-Run `python setup.py build` to build, and `python setup.py install` to install.
 Building requires Cython to be installed; just run `pip install -r requirements.txt` to
-do so.
+do so. Run `python setup.py build` to build, and `python setup.py install` to install.
+Alternatively, if you want an in-place build that puts the compiled library right in
+the current directory, run `python setup.py build_ext --inplace'
 
 Only tested with Python 2.7 and 3.4 on Ubuntu Linux. At the moment, the setup.py script
 uses a Linux/Unix-specific method to build the RVO2 library itself, before building the
