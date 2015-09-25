@@ -77,12 +77,6 @@ cdef extern from "RVOSimulator.h" namespace "RVO":
 
 cdef class PyRVOSimulator:
     cdef RVOSimulator *thisptr
-    cdef float default_neighborDist
-    cdef size_t default_maxNeighbors
-    cdef float default_timeHorizon
-    cdef float default_timeHorizonObst
-    cdef float default_radius
-    cdef float default_maxSpeed
 
     def __cinit__(self, float timeStep, float neighborDist, size_t maxNeighbors,
                   float timeHorizon, float timeHorizonObst, float radius,
