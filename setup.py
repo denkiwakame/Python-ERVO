@@ -17,7 +17,7 @@ class BuildRvo2Ext(_build_ext):
             os.makedirs(build_dir)
             subprocess.check_call(['cmake', '../..', '-DCMAKE_CXX_FLAGS=-fPIC'],
                                   cwd=build_dir)
-        subprocess.check_call(['make', '-j8'], cwd=build_dir)
+        subprocess.check_call(['cmake', '--build', '.'], cwd=build_dir)
 
         _build_ext.run(self)
 
