@@ -3,7 +3,7 @@ from setuptools.command.build_ext import build_ext as _build_ext
 from Cython.Build import cythonize
 
 
-class build_ext(_build_ext):
+class BuildRvo2Ext(_build_ext):
     """Builds RVO2 before our module."""
 
     def run(self):
@@ -19,7 +19,7 @@ class build_ext(_build_ext):
                                   cwd=build_dir)
         subprocess.check_call(['make', '-j8'], cwd=build_dir)
 
-        super().run()
+        _build_ext.run(self)
 
 
 extensions = [
@@ -33,15 +33,18 @@ extensions = [
 setup(
     name="pyrvo2",
     ext_modules=cythonize(extensions),
-    cmdclass={'build_ext': build_ext},
+    cmdclass={'build_ext': BuildRvo2Ext},
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
         'Intended Audience :: Information Technology',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Cython',
         'Topic :: Games/Entertainment :: Simulation',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
