@@ -2,7 +2,11 @@ Python bindings for Optimal Reciprocal Collision Avoidance
 ==========================================================
 
 This repository contains the RVO2 framework, as described below, along with
-[Cython](http://cython.org/)-based Python bindings.
+[Cython](http://cython.org/)-based Python bindings. Its home is
+[GitHub](https://github.com/sybrenstuvel/Python-RVO2). New updates are released
+there. There are no explicit version numbers -- all commits on the master
+branch are supposed to be stable.
+
 
 Building & installing
 ----------------------
@@ -11,8 +15,12 @@ Run `python setup.py build` to build, and `python setup.py install` to install.
 Building requires Cython to be installed; just run `pip install -r requirements.txt` to
 do so.
 
-Only tested with Python 3.4 on Ubuntu Linux. If you have success (or failure)
-stories, please share them!
+Only tested with Python 2.7 and 3.4 on Ubuntu Linux. At the moment, the setup.py script
+uses a Linux/Unix-specific method to build the RVO2 library itself, before building the
+Python wrappers.
+
+If you have success (or failure) stories, please share them!
+
 
 Differences with the C++ version
 --------------------------------
@@ -29,10 +37,17 @@ An example:
 import rvo2
 
 sim = rvo2.PyRVOSimulator(1/60, 1.5, 5, 1.5, 2, 0.4, 2)
-a0 = sim.addAgent((0, 0), 0.4)
-a1 = sim.addAgent((1, 0), 0.4)
-a2 = sim.addAgent((1, 1), 0.4)
-a3 = sim.addAgent((0, 1), 0.4)
+
+# Pass either just the position (the other parameters then use
+# the default values passed to the PyRVOSimulator constructor),
+# or pass all available parameters.
+a0 = sim.addAgent((0, 0))
+a1 = sim.addAgent((1, 0))
+a2 = sim.addAgent((1, 1))
+a3 = sim.addAgent((0, 1), 1.5, 5, 1.5, 2, 0.4, 2, (0, 0))
+
+# Obstacles are also supported.
+o1 = sim.addObstacle([(0.1, 0.1), (-0.1, 0.1), (-0.1, -0.1)])
 
 sim.setAgentPrefVelocity(a0, (1, 1))
 sim.setAgentPrefVelocity(a1, (-1, 1))
