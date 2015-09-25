@@ -216,4 +216,4 @@ cdef class PyRVOSimulator:
         cdef Vector2 c_velocity = Vector2(velocity[0], velocity[1])
         self.thisptr.setAgentVelocity(agent_no, c_velocity)
     def setTimeStep(self, float time_step):
-        return self.thisptr.setTimeStep(time_step)
+        self.thisptr.setTimeStep(time_step)
