@@ -1,7 +1,6 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 from libcpp cimport bool
-from cython.operator cimport dereference as deref
 
 
 cdef extern from "Vector2.h" namespace "RVO":
@@ -93,25 +92,29 @@ cdef class PyRVOSimulator:
         self.thisptr = new RVOSimulator(timeStep, neighborDist, maxNeighbors,
                                         timeHorizon, timeHorizonObst, radius,
                                         maxSpeed, c_velocity)
-        self.default_neighborDist = neighborDist
-        self.default_maxNeighbors = maxNeighbors
-        self.default_timeHorizon = timeHorizon
-        self.default_timeHorizonObst = timeHorizonObst
-        self.default_radius = radius
-        self.default_maxSpeed = maxSpeed
 
-    def addAgent(self, tuple pos, float radius):
+    def addAgent(self, tuple pos, neighborDist=None,
+                 maxNeighbors=None, timeHorizon=None,
+                 timeHorizonObst=None, radius=None, maxSpeed=None,
+                 velocity=None):
         cdef Vector2 c_pos = Vector2(pos[0], pos[1])
-        agent_nr = self.thisptr.addAgent(c_pos,
-                                         self.default_neighborDist,
-                                         self.default_maxNeighbors,
-                                         self.default_timeHorizon,
-                                         self.default_timeHorizonObst,
-                                         radius or self.default_radius,
-                                         self.default_maxSpeed,
-                                         Vector2())
+        cdef Vector2 c_velocity
+
+        if neighborDist is not None and velocity is None:
+            raise ValueError("Either pass only 'pos', or pass all parameters.")
+
+        if neighborDist is None:
+            agent_nr = self.thisptr.addAgent(c_pos)
+        else:
+            c_velocity = Vector2(velocity[0], velocity[1])
+            agent_nr = self.thisptr.addAgent(c_pos, neighborDist,
+                                             maxNeighbors, timeHorizon,
+                                             timeHorizonObst, radius, maxSpeed,
+                                             c_velocity)
+
         if agent_nr == RVO_ERROR:
             raise RuntimeError('Error adding agent to RVO simulation')
+
         return agent_nr
 
     def addObstacle(self, list vertices):
