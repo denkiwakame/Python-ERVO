@@ -69,6 +69,15 @@ for step in range(20):
 ```
 
 
+Threading support
+--------------------------------
+
+Calling Python-RVO2 from multiple threads has not been tested. However, code that
+may take longer to run (`doStep()`, `processObstacles()` and `queryVisibility(...)`)
+release the Global Interpreter Lock (GIL) so that other Python threads can run while
+RVO2 is processing.
+
+
 Optimal Reciprocal Collision Avoidance
 ======================================
 
