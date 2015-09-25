@@ -31,7 +31,9 @@ The `Vector2` and `Line` classes from the RVO2 library are _not_ wrapped. Instea
 vectors are passed as tuples `(x, y)` from/to Python. Lines are passed as tuples
 `(point x, point y, direction x, direction y)`.
 
-An example:
+
+Example code
+------------
 
 ```python
 #!/usr/bin/env python
