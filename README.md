@@ -40,7 +40,7 @@ Example code
 
 import rvo2
 
-sim = rvo2.PyRVOSimulator(1/60, 1.5, 5, 1.5, 2, 0.4, 2)
+sim = rvo2.PyRVOSimulator(1/60., 1.5, 5, 1.5, 2, 0.4, 2)
 
 # Pass either just the position (the other parameters then use
 # the default values passed to the PyRVOSimulator constructor),
