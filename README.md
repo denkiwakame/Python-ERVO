@@ -23,6 +23,8 @@ Only tested with Python 2.7 and 3.4 on Ubuntu Linux. The setup.py script uses CM
 the RVO2 library itself, before building the Python wrappers. If you have success (or failure)
 stories, please share them!
 
+To build on Mac OSX, give an `export MACOSX_DEPLOYMENT_TARGET=10.xx` command first, before
+running `python setup.py build`. Replace `10.xx` with your version of OSX, for example `10.11`.
 
 Differences with the C++ version
 --------------------------------
