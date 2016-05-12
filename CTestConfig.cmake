@@ -1,5 +1,5 @@
 #
-# examples/CMakeLists.txt
+# CTestConfig.cmake
 # RVO2 Library
 #
 # Copyright 2008 University of North Carolina at Chapel Hill
@@ -30,18 +30,10 @@
 # <http://gamma.cs.unc.edu/RVO2/>
 #
 
-include_directories(${RVO_SOURCE_DIR}/src)
+set(CTEST_PROJECT_NAME "RVO2")
+set(CTEST_NIGHTLY_START_TIME "01:00:00 UTC")
 
-add_executable(Blocks Blocks.cpp)
-target_link_libraries(Blocks RVO)
-add_test(Blocks Blocks)
-
-add_executable(Circle Circle.cpp)
-target_link_libraries(Circle RVO)
-add_test(Circle Circle)
-
-add_executable(Roadmap Roadmap.cpp)
-target_link_libraries(Roadmap RVO)
-add_test(Roadmap Roadmap)
-
-install(TARGETS Blocks Circle Roadmap DESTINATION bin)
+set(CTEST_DROP_METHOD "http")
+set(CTEST_DROP_SITE "my.cdash.org")
+set(CTEST_DROP_LOCATION "/submit.php?project=RVO2")
+set(CTEST_DROP_SITE_CDASH TRUE)
