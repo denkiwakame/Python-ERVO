@@ -17,7 +17,7 @@ Run `pip install -r requirements.txt` to install the tested version of Cython, o
 
 Run `python setup.py build` to build, and `python setup.py install` to install.
 Alternatively, if you want an in-place build that puts the compiled library right in
-the current directory, run `python setup.py build_ext --inplace'
+the current directory, run `python setup.py build_ext --inplace`
 
 Only tested with Python 2.7 and 3.4 on Ubuntu Linux. The setup.py script uses CMake to build
 the RVO2 library itself, before building the Python wrappers. If you have success (or failure)
