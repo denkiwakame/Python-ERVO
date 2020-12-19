@@ -574,11 +574,13 @@ class RVOSimulator {
   void setTimeStep(float timeStep);
 
  private:
-  std::vector<Agent *> agents_;
   Agent *defaultAgent_;
-  float globalTime_;
-  KdTree *kdTree_;
   std::vector<Obstacle *> obstacles_;
+
+ protected:
+  std::vector<Agent *> agents_;
+  KdTree *kdTree_;
+  float globalTime_;
   float timeStep_;
 
   friend class Agent;

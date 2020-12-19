@@ -62,6 +62,7 @@ class Agent {
    * \brief      Computes the new velocity of this agent.
    */
   void computeNewVelocity();
+  void computeNewVelocityForERVO(const Vector2 &ps, const float rs);
 
   /**
    * \brief      Inserts an agent neighbor into the set of neighbors of
@@ -104,7 +105,8 @@ class Agent {
   size_t id_;
 
   friend class KdTree;
-  friend class RVOSimulator;
+  friend class RVOSimulator;  // TODO: create SimulatorBase
+  friend class ERVOSimulator;
 };
 
 /**

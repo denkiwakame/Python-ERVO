@@ -196,6 +196,7 @@ class KdTree {
 
   friend class Agent;
   friend class RVOSimulator;
+  friend class ERVOSimulator;  // TODO: SimulatorBase
 };
 }  // namespace RVO
 
