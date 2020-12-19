@@ -62,7 +62,7 @@ void Agent::computeNeighbors() {
 void addEvacVelocity(const Vector2 &ps, const Vector2 &pa, const float rs,
                      Vector2 &result) {
   Vector2 evacVec = pa - ps;
-  if (abs(evacVec) > rs) return;
+  if (abs(evacVec) > rs || abs(evacVec) < 1e-4 /* self */) return;
 
   result = result + normalize(evacVec);
 }
