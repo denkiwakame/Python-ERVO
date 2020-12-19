@@ -34,7 +34,6 @@ cdef extern from "RVOSimulator.h" namespace "RVO":
                         const Vector2 & velocity)
         size_t addObstacle(const vector[Vector2] & vertices)
         void doStep() nogil
-#         void doStepForERVO(const Vector2& point, float r) nogil
         size_t getAgentAgentNeighbor(size_t agentNo, size_t neighborNo) const
         size_t getAgentMaxNeighbors(size_t agentNo) const
         float getAgentMaxSpeed(size_t agentNo) const
@@ -179,12 +178,6 @@ cdef class PyRVOSimulator:
     def doStep(self):
         with nogil:
             self.thisptr.doStep()
-
-    # XXX EORCA implementation doStepE
-#     def doStepE(self, tuple point, float r):
-#         cdef Vector2 c_point = Vector2(point[0], point[1])
-#         with nogil:
-#             self.thisptr.doStepE(c_point, r)
 
     def getAgentAgentNeighbor(self, size_t agent_no, size_t neighbor_no):
         return self.thisptr.getAgentAgentNeighbor(agent_no, neighbor_no)
